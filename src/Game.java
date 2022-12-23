@@ -52,9 +52,21 @@ public class Game {
         return (player.getPosition() == boardSize);
     }
 
-    //initialiser le(s) joueur(s)
-
-    //lancer de dés
-
-    //définir positionnemnet (avec calcul des coups spéciaux)
+    //définir positionnement (avec calcul des coups spéciaux)
+    public boolean isSpecialBox (int position){
+        if (isGooseBox(position)){
+            return true;
+        }else if(position>getBoardSize()){
+            return true;
+        }else {
+            return false;
+        }
+    }
+    public boolean isGooseBox(int position){
+        if (position != 63) {
+            return position % 9 == 0;
+        }else{
+            return false;
+        }
+    }
 }
