@@ -1,7 +1,8 @@
 public class Game {
-    private String [] boardGame = new String[64];
-    private String [] boardPosition = new String[64];
 
+    private final int boardSize = 63;
+    private String [] boardGame = new String[boardSize+1];
+    private String [] boardPosition = new String[boardSize+1];
     private int dice1;
     private int dice2;
 
@@ -11,6 +12,9 @@ public class Game {
 
     public int getDice2() {
         return dice2;
+    }
+    public int getBoardSize() {
+        return boardSize;
     }
 
     public int getRandomDice(){
@@ -42,6 +46,10 @@ public class Game {
             }
             System.out.print(boardPosition[i]);
         }
+        System.out.println("");
+    }
+    public boolean gameOver(Player player){
+        return (player.getPosition() == boardSize);
     }
 
     //initialiser le(s) joueur(s)

@@ -9,6 +9,19 @@ public class Main {
         game.initBoard();
         game.setBoardPosition(player1.getPosition());
         //continuer le jeu jusqu'à ce qu'on arrive en 63
+        while (!game.gameOver(player1)){
+            int sum = throwDice();
+            int newPosition = player1.getPosition()+sum;
+            if (newPosition>game.getBoardSize()){
+                int advanceMax = 63 - player1.getPosition();
+                int retreat = sum - advanceMax;
+                newPosition = 63 - retreat;
+            }
+            player1.setPosition(newPosition);
+            game.initBoard();
+            game.setBoardPosition(player1.getPosition());
+        }
+        System.out.println("Bravo, tu as gagné");
     }
     public static int firstThrowDice(){
         Game game = new Game();
@@ -33,5 +46,14 @@ public class Main {
             System.out.println("position : " + sumDice);
             return sumDice;
         }
+    }
+    public static int throwDice(){
+        Game game = new Game();
+        int dice1 = game.getRandomDice();
+        int dice2 = game.getRandomDice();
+        int sumDice = dice1 + dice2;
+        System.out.println("dés 1 : " + dice1);
+        System.out.println("dés 2 : " + dice2);
+        return sumDice;
     }
 }
