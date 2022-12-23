@@ -12,11 +12,18 @@ public class Main {
         while (!game.gameOver(player1)){
             int sum = throwDice();
             int newPosition = player1.getPosition()+sum;
-            if (newPosition>game.getBoardSize()){
-                int advanceMax = 63 - player1.getPosition();
-                int retreat = sum - advanceMax;
-                newPosition = 63 - retreat;
+            while (game.isSpecialBox(newPosition)){
+                if (game.isGooseBox(newPosition)){
+                    newPosition = newPosition + sum;
+                    System.out.println("Tu es tombé sur une case oie");
+                }
+                if (newPosition>game.getBoardSize()){
+                    int advanceMax = 63 - player1.getPosition();
+                    int retreat = sum - advanceMax;
+                    newPosition = 63 - retreat;
+                }
             }
+
             player1.setPosition(newPosition);
             game.initBoard();
             game.setBoardPosition(player1.getPosition());
